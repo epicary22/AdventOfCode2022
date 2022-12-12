@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution1
+public class Solution2
 {
 	private static int numOverlaps;
 
@@ -19,11 +19,13 @@ public class Solution1
 		int sectionsStart2 = Integer.parseInt(sections.get(2));
 		int sectionsEnd2 = Integer.parseInt(sections.get(3));
 
-		if (sectionsStart1 <= sectionsStart2 && sectionsEnd1 >= sectionsEnd2)
-		{
-			return true;
-		}
-		else if (sectionsStart2 <= sectionsStart1 && sectionsEnd2 >= sectionsEnd1)
+		if
+			(
+				sectionsStart1 >= sectionsStart2 && sectionsStart1 <= sectionsEnd2
+				|| sectionsEnd1 >= sectionsStart2 && sectionsEnd1 <= sectionsEnd2
+				|| sectionsStart2 >= sectionsStart1 && sectionsStart2 <= sectionsEnd1
+				|| sectionsEnd2 >= sectionsStart1 && sectionsEnd2 <= sectionsEnd1
+			)
 		{
 			return true;
 		}
@@ -46,6 +48,6 @@ public class Solution1
 			}
 		}
 
-		System.out.printf("The number of totally overlapping groups is: %d.%n", numOverlaps);
+		System.out.printf("The number of partially overlapping groups is: %d.%n", numOverlaps);
 	}
 }

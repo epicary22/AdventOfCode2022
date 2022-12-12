@@ -18,8 +18,42 @@ public class Solution1
 		}
 	}
 
+	public static int checkForBadge(char inputItem, ArrayList<String> rucksacks)
+	{
+		String ruckN = rucksacks.get(0);
+		if (rucksacks.size() != 1)
+		{
+			ArrayList<String> otherRucksacks = rucksacks.subList(1, rucksacks.size());
+		}
+		else // Bottom of the list of rucksacks
+		{
+			ArrayList<String> otherRucksacks = null;
+		}
+		for (int i = 0; i < ruckN.length(); i++)
+		{
+			char ruckNItem = ruckN.charAt(i);
+			if (ruckNItem == inputItem || ruckNItem == '_')
+			{
+				if (checkForBadge(ruckNItem, otherRucksacks))
+				{
+				}
+			}
+		}
+	}
+
 	public static int rucksacksToPriority(ArrayList<String> rucksacks)
 	{
+		String ruck1 = rucksacks.get(0);
+
+		for (int i = 0; i < ruck1.length(); i++)
+		{
+			char ruck1Item = ruck1.charAt(i);
+			ArrayList<String> otherRucksacks = rucksacks.subList(1, rucksacks.size());
+			if (checkForBadge(ruck1Item, otherRucksacks))
+			{
+				return charToPriority(ruck1Item);
+			}
+		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException

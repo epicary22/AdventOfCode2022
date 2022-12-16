@@ -1,0 +1,16 @@
+== Advent of Code Day 6 ==
+
+Find the index of the last character in the marker
+Marker is the first string of 4 unique characters
+
+Setup:
+
+input String from a FileReader, this is one line.
+take a slice of the string
+"asddffggasdjjhk" ->
+"asdd" -> Character[] {'a', 's', 'd', 'd'} 
+		using Character.valueOf(str.charAt(x))
+-> use HashSet<Character>(charArray) -> {'a', 's', 'd'}
+-> check hashSet.size()
+-> if it's 4, return the index of the start character +4.
+

@@ -1,8 +1,13 @@
-import java.io.*;
-import java.util.Objects;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class Solution1_7
+public class Solution2_7
 {
+
+    public static final Integer MIN_SPACE = 30_000_000;
+    public static final Integer STORAGE_SIZE = 70_000_000;
+
     public static Directory getFileTree() throws IOException, InterruptedException
     {
         BufferedReader logLines = new BufferedReader(new FileReader("7/data.txt"));
@@ -72,30 +77,36 @@ public class Solution1_7
         return out;
     }
 
-    public static Integer getSpecificDirectorySums() throws IOException
+    public static Integer findBestDirectoryToDelete() throws IOException
     {
-        Integer directorySizeSum = 0;
+        Integer bestDirectorySize = Integer.MAX_VALUE;
         BufferedReader formattedFileTree = new BufferedReader(new FileReader("7/file_tree.txt"));
         String line = formattedFileTree.readLine();
+        Integer min_size = MIN_SPACE - (STORAGE_SIZE - Integer.parseInt(line.split(" ")[1]));
+        System.out.println(min_size);
         while (line != null)
         {
             if (!line.isEmpty())
             {
                 String strDirSize = line.split(" ")[1];
                 Integer directorySize = Integer.valueOf(strDirSize);
-                if (directorySize <= 100_000)
+                if (directorySize >= min_size)
                 {
-                    directorySizeSum += directorySize;
+                    if (directorySize < bestDirectorySize)
+                    {
+                        bestDirectorySize = directorySize;
+                    }
                 }
             }
             line = formattedFileTree.readLine();
         }
-        return directorySizeSum;
+        return bestDirectorySize;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
-        int finalTotal = getSpecificDirectorySums();
-        System.out.println("The final total of Bytes is: " + finalTotal);
+        int bestDirectorySize = findBestDirectoryToDelete();
+        System.out.println("The best directory size is: " + bestDirectorySize +
+                ", leaving you with " + (70_000_000 - 40268565 + bestDirectorySize) + "B.");
     }
 }

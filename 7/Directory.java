@@ -3,8 +3,10 @@ import java.util.*;
 public class Directory {
     public ArrayList<Integer> fileSizesList = new ArrayList<>();
     public HashSet<Directory> directoriesSet = new HashSet<>();
+    public HashMap<String, Directory> directoriesMap;
     public String name;
-    public String containerDirectory;
+    public Directory containerDirectory;
+    public String containerDirectoryName;
     public String dirPath;
 
     public Directory(String name)
@@ -12,11 +14,10 @@ public class Directory {
         this.name = name;
     }
 
-    public Directory(String name, String containerDirectory)
+    public Directory(String name, Directory containerDirectory)
     {
         this.name = name;
         this.containerDirectory = containerDirectory;
-        this.dirPath = containerDirectory + name;
     }
 
     public Integer getCompleteByteTotal()
@@ -28,7 +29,7 @@ public class Directory {
         {
             total += directory.getCompleteByteTotal();
         }
-        return total;  // TODO get this counter thing done
+        return total;
     }
 
     public Integer getCurrentDirectoryByteTotal()
@@ -47,14 +48,14 @@ public class Directory {
 
     public void addDirectory(Directory directory)
     {
-        directory.setContainerDirectory(this.getDirectoryPath());
+        directory.setContainerDirectoryName(this.getDirectoryPath());
         this.directoriesSet.add(directory);
     }
 
-    private void setContainerDirectory(String containerDir)
+    private void setContainerDirectoryName(String containerDirName)
     {
-        this.containerDirectory = containerDir;
-        this.dirPath = containerDir + "/" + this.getName();
+        this.containerDirectoryName = containerDirName;
+        this.dirPath = containerDirName + "/" + this.getName();
     }
 
     public String getName()
@@ -74,9 +75,24 @@ public class Directory {
         }
     }
 
-    public boolean containsSubdirectories()
+    public String getContainerDirectoryName()
     {
-        return directoriesSet.isEmpty();
+        return this.containerDirectoryName;
+    }
+
+    public Directory getContainerDirectory()
+    {
+        return this.containerDirectory;
+    }
+
+    public HashMap<String, Directory> getDirectoriesMap()
+    {
+        HashMap<String, Directory> map = new HashMap<>();
+        for (Directory dir : this.directoriesSet)
+        {
+            map.put(dir.getName(), dir);
+        }
+        return map;
     }
 
     public void printContents()
@@ -91,9 +107,7 @@ public class Directory {
         for (Directory directory : directoriesSet)
         {
             System.out.println(directory.getDirectoryPath());
-//            directory.printContents();
-//            System.out.println("end " + directory.getName() + ";");
         }
-        System.out.println("Complete byte total: " + this.getCompleteByteTotal());
+        System.out.println("Complete byte total: " + this.getCompleteByteTotal() + "\n");
     }
 }

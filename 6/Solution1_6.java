@@ -1,20 +1,19 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution2
+public class Solution1_6
 {
 
 	public static int markerIndex;
-	public static final int MARKER_SIZE = 14;
 
 	public static boolean isMarker(String inputString)
 	{
 		HashSet<Character> differentChars = new HashSet<Character>();
-		for (int c = 0; c < MARKER_SIZE; c++)
+		for (int c = 0; c < 4; c++)
 		{
 			differentChars.add(Character.valueOf(inputString.charAt(c)));
 		}
-		if (differentChars.size() == MARKER_SIZE)
+		if (differentChars.size() == 4)
 		{
 			return true;
 		}
@@ -23,9 +22,9 @@ public class Solution2
 
 	public static int findMarkerIndex(String data)
 	{
-		for (int m = MARKER_SIZE; m < data.length(); m++)
+		for (int m = 4; m < data.length(); m++)
 		{
-			String possibleMarker = data.substring(m - MARKER_SIZE, m);
+			String possibleMarker = data.substring(m - 4, m);
 			if (isMarker(possibleMarker))
 			{
 				return m;

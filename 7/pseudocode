@@ -12,3 +12,16 @@ you add both a's 254B and e's 254B.
 
 Main problem is that you need to figure out the file tree.
 Convert it into a .txt or smth that you can read.
+
+Idea:
+Make a Directory Java class that contains an
+ArrayList<Integer> and an (Maybe use ArrayList<Map<String, Integer> later)
+ArrayList<Directory>
+thus, you can have
+Directory {
+    ArrayList<Integer> {8936, 19873}
+    ArrayList<Directory> {
+    Directory { ... },
+    Directory { ... }
+    }
+};

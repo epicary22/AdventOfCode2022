@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Solution2_2
+public class Solution2_2_3
 {
 
 	private static int priorityTotal; 
@@ -47,7 +47,7 @@ public class Solution2_2
 		return 0;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException, IOException
+	public static void main(String[] args) throws IOException
 	{
 		String currLine;
 

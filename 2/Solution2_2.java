@@ -1,7 +1,6 @@
-import java.util.*;
 import java.io.*;
 
-public class Solution2
+public class Solution2_2
 {
 	
 	static int myScore;
@@ -31,7 +30,7 @@ public class Solution2
 		return roundScore;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException, IOException
+	public static void main(String[] args) throws IOException
 	{
 		String currLine;
 

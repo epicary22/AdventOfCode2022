@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution1
+public class Solution2_5
 {
 
 	public static ArrayList<ArrayList<String>> getCrates(BufferedReader dataFile) throws IOException
@@ -65,7 +65,7 @@ public class Solution1
 		}
 	}
 
-	public static void main(String[] args) throws FileNotFoundException, IOException
+	public static void main(String[] args) throws IOException
 	{
 		BufferedReader dataFile = new BufferedReader(new FileReader("data.txt"));
 

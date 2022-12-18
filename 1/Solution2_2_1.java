@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution2_2
+class Solution2_2_1
 {
 	
-	public static void main(String[] args) throws FileNotFoundException, IOException
+	public static void main(String[] args) throws IOException
 	{
 		int calorieGroupTotal;
 		int[] calorieGroupTotals;

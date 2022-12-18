@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution1
+public class Solution1_4
 {
 	private static int numOverlaps;
 
@@ -33,7 +33,7 @@ public class Solution1
 		}
 	}
 
-	public static void main(String[] args) throws IOException, FileNotFoundException
+	public static void main(String[] args) throws IOException
 	{
 		BufferedReader dataFile = new BufferedReader(new FileReader("data.txt"));
 

@@ -1,9 +1,9 @@
 import java.io.*;
 
-public class Solution1
+public class Solution1_1
 {
 	
-	public static void main(String[] args) throws FileNotFoundException, IOException
+	public static void main(String[] args) throws IOException
 	{
 		int lineNum;
 		int calorieGroupTotal;

@@ -1,0 +1,29 @@
+== Advent of Code Day 8 ==
+
+This one is asking you to find which trees are "visible",
+meaning that there are no trees 1higher than it
+either up, down, right, or left.
+
+To solve this, let each tree have its row and its column.
+
+30373
+25512
+65332
+33549
+35390
+
+create an int[y][] for rows and an int[x][] for columns.
+
+tree at (1, 1) has row {2, 5, 5, 1, 2} and col {0, 5, 5, 3, 5}
+its value is 5, and both its row and col indices are @1
+so scan to the left of it, then the right of it for each list
+
+Scan in this order: 
+row left: max of {2} is 2, 2 < 5 and visible;
+row right: max of {5, 1, 2} is 5, 5 = 5 and not visible;
+col left: max of {0} is 0, 0 < 5 and visible;
+col right: max of {5, 3, 5} is 5, 5 = 5 and not visible;
+
+Use Arrays.sort(int[]) to scan
+
+if any of these check out, increment a counter.

@@ -4,7 +4,6 @@ import java.util.*;
 public class Solution2_8
 {
 	// TODO Change this
-	public static int visibleTreeCount;
 
 	public static HashMap<String, int[][]> getRowsAndColumns() throws IOException
 	{
@@ -30,60 +29,85 @@ public class Solution2_8
 		return rowsAndColumns;
 	}
 
-	// TODO Change this
-	public static int highestValInArray(int[] array, boolean removeIndex0)
+	public static int[] reverseArray(int[] array)
 	{
+		if (array.length != 0)
+		{
+			int[] reverse = new int[array.length - 1];
+			for (int i = 0; i < array.length - 1; i++)
+			{
+				reverse[i] = array[array.length - 1 - i];
+			}
+			return reverse;
+		}
+		return array;
+	}
+
+	// TODO Change this
+	public static int scenicValueOf(int[] array, int treeValue, boolean removeIndex0)
+	{
+		int scenicScore = 0;
+
 		if (array.length == 0)
 		{
-			return -1;
+			return 0;
 		}
 		if (removeIndex0)
 		{
 			array[0] = -1;
 		}
-		Arrays.sort(array);
-		return array[array.length - 1];
+		// val 5, {-1, 2, 4, 3, 7}
+		// val 5, {3, 2, 2, 1}
+		for (int i = 0; i < array.length; i++)
+		{
+			scenicScore++;
+			if (array[i] >= treeValue)
+			{
+				break;
+			}	
+		}
+		return scenicScore;
 	}
 
 	// TODO Change this
-	public static boolean scanRowAndColumn(HashMap<String, int[][]> rowsAndColumns, int rowNum, int colNum)
+	public static int getTreeScenicValue(HashMap<String, int[][]> rowsAndColumns, int rowNum, int colNum)
 	{
 		int treeValue = rowsAndColumns.get("row")[rowNum][colNum];
 		int[] row = rowsAndColumns.get("row")[rowNum];
 		int[] col = rowsAndColumns.get("col")[colNum];
 
+		// TODO fix whatever this is
 		int[] left = Arrays.copyOfRange(row, 0, colNum);
+		left = reverseArray(left);
 		int[] right = Arrays.copyOfRange(row, colNum, 99);
 		int[] up = Arrays.copyOfRange(col, 0, rowNum);
+		up = reverseArray(up);
 		int[] down = Arrays.copyOfRange(col, rowNum, 99);
 
 		boolean removeIndex0 = false;
+		int totalScenicValue = 1;
 		for (int[] arrayToScan : new int[][] {left, right, up, down})
 		{
-			if (treeValue > highestValInArray(arrayToScan, removeIndex0))
-			{
-				return true;
-			}
+			System.out.print(scenicValueOf(arrayToScan, treeValue, removeIndex0) + " ");
+			totalScenicValue *= scenicValueOf(arrayToScan, treeValue, removeIndex0);
 			removeIndex0 = !removeIndex0;
 		}
-		return false;
+		System.out.println();
+		return totalScenicValue;
 	}
 
 	// TODO Change this
 	public static void main(String[] args) throws IOException
 	{
+		int totalScenicValue = -1;
+
 		HashMap<String, int[][]> rowsAndColumns = getRowsAndColumns();
-		for (int row = 0; row < 99; row++)
+		for (int row = 1; row < 2; row++)
 		{
-			for (int col = 0; col < 99; col++)
+			for (int col = 1; col < 2; col++)
 			{
-				if (scanRowAndColumn(rowsAndColumns, row, col))
-				{
-					visibleTreeCount += 1;
-				}
+				totalScenicValue = getTreeScenicValue(rowsAndColumns, row, col);
 			}
 		}
-
-		System.out.println(visibleTreeCount);
 	}
 }

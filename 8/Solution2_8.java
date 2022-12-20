@@ -33,7 +33,7 @@ public class Solution2_8
 	{
 		if (array.length != 0)
 		{
-			int[] reverse = new int[array.length - 1];
+			int[] reverse = new int[array.length];
 			for (int i = 0; i < array.length - 1; i++)
 			{
 				reverse[i] = array[array.length - 1 - i];
@@ -43,10 +43,11 @@ public class Solution2_8
 		return array;
 	}
 
-	// TODO Change this
+	// TODO Somehow this method is wrong, change it
 	public static int scenicValueOf(int[] array, int treeValue, boolean removeIndex0)
 	{
 		int scenicScore = 0;
+		System.out.println(array.length);
 
 		if (array.length == 0)
 		{

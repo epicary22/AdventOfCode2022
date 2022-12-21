@@ -5,15 +5,15 @@ public class Solution2_8
 {
 	// TODO Change this
 
-	public static HashMap<String, int[][]> getRowsAndColumns() throws IOException
+	public static HashMap<String, Integer[][]> getRowsAndColumns() throws IOException
 	{
-		int[][] heightRows = new int[99][99];
-		int[][] heightColumns = new int[99][99];
-		HashMap<String, int[][]> rowsAndColumns = new HashMap<>();
+		Integer[][] heightRows = new Integer[99][99];
+		Integer[][] heightColumns = new Integer[99][99];
+		HashMap<String, Integer[][]> rowsAndColumns = new HashMap<>();
 		rowsAndColumns.put("row", heightRows);
 		rowsAndColumns.put("col", heightColumns);
 
-		BufferedReader dataFile = new BufferedReader(new FileReader("data.txt"));
+		BufferedReader dataFile = new BufferedReader(new FileReader("8/data.txt"));
 
 		for (int row = 0; row < 99; row++)
 		{
@@ -29,40 +29,43 @@ public class Solution2_8
 		return rowsAndColumns;
 	}
 
-	public static int[] reverseArray(int[] array)
-	{
-		if (array.length != 0)
-		{
-			int[] reverse = new int[array.length];
-			for (int i = 0; i < array.length - 1; i++)
-			{
-				reverse[i] = array[array.length - 1 - i];
-			}
-			return reverse;
-		}
-		return array;
-	}
+//	public static Integer[] reverseArray(Integer[] array)
+//	{
+//		if (array.length != 0)
+//		{
+//			Integer[] reverse = new Integer[array.length];
+//			for (Integer i = 0; i < array.length - 1; i++)
+//			{
+//				reverse[i] = array[array.length - 1 - i];
+//			}
+//			return reverse;
+//		}
+//		return array;
+//	}
 
 	// TODO Somehow this method is wrong, change it
-	public static int scenicValueOf(int[] array, int treeValue, boolean removeIndex0)
+	public static Integer scenicValueOf(ArrayList<Integer> array, Integer treeValue, boolean removeIndex0)
 	{
-		int scenicScore = 0;
-		System.out.println(array.length);
+		Integer scenicScore = 0;
 
-		if (array.length == 0)
+		if (array.size() == 0)
 		{
 			return 0;
 		}
 		if (removeIndex0)
 		{
-			array[0] = -1;
+			array.remove(0);
 		}
-		// val 5, {-1, 2, 4, 3, 7}
-		// val 5, {3, 2, 2, 1}
-		for (int i = 0; i < array.length; i++)
+		/* TODO System.out.print("\n" + array.size() + ": ");
+		for (Integer i : array)
+		{
+			System.out.print(i + " ");
+		}
+		 */
+		for (Integer i : array)
 		{
 			scenicScore++;
-			if (array[i] >= treeValue)
+			if (i >= treeValue)
 			{
 				break;
 			}	
@@ -71,29 +74,27 @@ public class Solution2_8
 	}
 
 	// TODO Change this
-	public static int getTreeScenicValue(HashMap<String, int[][]> rowsAndColumns, int rowNum, int colNum)
+	public static Integer getTreeScenicValue(HashMap<String, Integer[][]> rowsAndColumns, int rowNum, int colNum)
 	{
-		int treeValue = rowsAndColumns.get("row")[rowNum][colNum];
-		int[] row = rowsAndColumns.get("row")[rowNum];
-		int[] col = rowsAndColumns.get("col")[colNum];
+		Integer treeValue = rowsAndColumns.get("row")[rowNum][colNum];
+		Integer[] row = rowsAndColumns.get("row")[rowNum];
+		Integer[] col = rowsAndColumns.get("col")[colNum];
 
-		// TODO fix whatever this is
-		int[] left = Arrays.copyOfRange(row, 0, colNum);
-		left = reverseArray(left);
-		int[] right = Arrays.copyOfRange(row, colNum, 99);
-		int[] up = Arrays.copyOfRange(col, 0, rowNum);
-		up = reverseArray(up);
-		int[] down = Arrays.copyOfRange(col, rowNum, 99);
+		ArrayList<Integer> left = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(row, 0, colNum)));
+		Collections.reverse(left);
+		ArrayList<Integer> right = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(row, colNum, 99)));
+		ArrayList<Integer> up = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(col, 0, rowNum)));
+		Collections.reverse(up);
+		ArrayList<Integer> down = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(col, rowNum, 99)));
 
 		boolean removeIndex0 = false;
-		int totalScenicValue = 1;
-		for (int[] arrayToScan : new int[][] {left, right, up, down})
+		Integer totalScenicValue = 1;
+		for (ArrayList<Integer> arrayToScan : new ArrayList[] {left, right, up, down})
 		{
-			System.out.print(scenicValueOf(arrayToScan, treeValue, removeIndex0) + " ");
 			totalScenicValue *= scenicValueOf(arrayToScan, treeValue, removeIndex0);
+			// TODO System.out.println("\nScore of array to scan: " + scenicValueOf(arrayToScan, treeValue, false));
 			removeIndex0 = !removeIndex0;
 		}
-		System.out.println();
 		return totalScenicValue;
 	}
 
@@ -101,14 +102,18 @@ public class Solution2_8
 	public static void main(String[] args) throws IOException
 	{
 		int totalScenicValue = -1;
+		ArrayList<Integer> scenicValuesList = new ArrayList<>();
 
-		HashMap<String, int[][]> rowsAndColumns = getRowsAndColumns();
-		for (int row = 1; row < 2; row++)
+		HashMap<String, Integer[][]> rowsAndColumns = getRowsAndColumns();
+		for (int row = 0; row < 99; row++)
 		{
-			for (int col = 1; col < 2; col++)
+			for (int col = 0; col < 99; col++)
 			{
 				totalScenicValue = getTreeScenicValue(rowsAndColumns, row, col);
+				scenicValuesList.add(totalScenicValue);
 			}
 		}
+		scenicValuesList.sort(Collections.reverseOrder());
+		System.out.println(scenicValuesList.get(0));
 	}
 }

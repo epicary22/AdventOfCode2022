@@ -3,8 +3,6 @@ import java.util.*;
 
 public class Solution2_8
 {
-	// TODO Change this
-
 	public static HashMap<String, Integer[][]> getRowsAndColumns() throws IOException
 	{
 		Integer[][] heightRows = new Integer[99][99];
@@ -29,21 +27,6 @@ public class Solution2_8
 		return rowsAndColumns;
 	}
 
-//	public static Integer[] reverseArray(Integer[] array)
-//	{
-//		if (array.length != 0)
-//		{
-//			Integer[] reverse = new Integer[array.length];
-//			for (Integer i = 0; i < array.length - 1; i++)
-//			{
-//				reverse[i] = array[array.length - 1 - i];
-//			}
-//			return reverse;
-//		}
-//		return array;
-//	}
-
-	// TODO Somehow this method is wrong, change it
 	public static Integer scenicValueOf(ArrayList<Integer> array, Integer treeValue, boolean removeIndex0)
 	{
 		Integer scenicScore = 0;
@@ -56,12 +39,6 @@ public class Solution2_8
 		{
 			array.remove(0);
 		}
-		/* TODO System.out.print("\n" + array.size() + ": ");
-		for (Integer i : array)
-		{
-			System.out.print(i + " ");
-		}
-		 */
 		for (Integer i : array)
 		{
 			scenicScore++;
@@ -73,7 +50,6 @@ public class Solution2_8
 		return scenicScore;
 	}
 
-	// TODO Change this
 	public static Integer getTreeScenicValue(HashMap<String, Integer[][]> rowsAndColumns, int rowNum, int colNum)
 	{
 		Integer treeValue = rowsAndColumns.get("row")[rowNum][colNum];
@@ -92,13 +68,11 @@ public class Solution2_8
 		for (ArrayList<Integer> arrayToScan : new ArrayList[] {left, right, up, down})
 		{
 			totalScenicValue *= scenicValueOf(arrayToScan, treeValue, removeIndex0);
-			// TODO System.out.println("\nScore of array to scan: " + scenicValueOf(arrayToScan, treeValue, false));
 			removeIndex0 = !removeIndex0;
 		}
 		return totalScenicValue;
 	}
 
-	// TODO Change this
 	public static void main(String[] args) throws IOException
 	{
 		int totalScenicValue = -1;

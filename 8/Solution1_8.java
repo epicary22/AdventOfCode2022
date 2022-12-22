@@ -13,7 +13,7 @@ public class Solution1_8
 		rowsAndColumns.put("row", heightRows);
 		rowsAndColumns.put("col", heightColumns);
 
-		BufferedReader dataFile = new BufferedReader(new FileReader("data.txt"));
+		BufferedReader dataFile = new BufferedReader(new FileReader("8/data.txt"));
 
 		for (int row = 0; row < 99; row++)
 		{

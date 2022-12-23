@@ -1,0 +1,23 @@
+== Advent of Code Day 9 ==
+
+The problem of today is to find out what tiles the T goes over.
+
+if T is within 1 (vertically or horizontally) of H:
+    T position does not change.
+if T is not within 1 of H:
+    T position is the previous position of H.
+
+For instance:
+.T.. > ....
+..H. > ..TH
+
+TH.. (> T.H.) > .TH.
+
+so now we need tPos, hPos, and oldHPos variables (arraylists)
+All of these values will start at (0,0) and can only be positive ex. (1,2)
+parse these into a "find distance" function (Math.abs(tX-hX),Math.abs(tY-hY))
+
+save the hPos to oldHPos
+have a moveHPos(dX, dY) that moves it to its new position
+have a findTPos() function that uses hPos and oldHPos to tell where tPos should be
+save current tPos into a set

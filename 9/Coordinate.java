@@ -61,9 +61,30 @@ public class Coordinate
         return (Math.abs(this.xPos - c.getX()) <= 1 && Math.abs(this.yPos - c.getY()) <= 1);
     }
 
+    public ArrayList<Integer> distanceFrom(Coordinate c)
+    {
+        return new ArrayList<>(List.of(c.getX() - this.getX(), c.getY() - this.getY()));
+    }
+
+    public void setX(Integer xPos)
+    {
+        this.xPos = xPos;
+    }
+
+    public void setY(Integer yPos)
+    {
+        this.yPos = yPos;
+    }
+
     public void setToCoordinate(Coordinate c)
     {
         this.xPos = c.getX();
         this.yPos = c.getY();
+    }
+
+    public void setToArrayList(ArrayList<Integer> pos)
+    {
+        this.xPos = pos.get(0);
+        this.yPos = pos.get(1);
     }
 }

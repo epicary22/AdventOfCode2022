@@ -1,0 +1,47 @@
+== Advent of Code Day 11 ==
+
+So we have:
+
+Monkey 0:
+Worry values held: 79, 98.
+Items inspected: 0.
+Operator *, second operand 19, divisible test 23, throw to 2 if true, throw to 3 if false.
+
+Monkey 1:
+Worry values held: 54, 65, 75, 74.
+Items inspected: 0.
+Operator +, second operand 6, divisible test 19, throw to 2 if true, throw to 0 if false.
+
+Monkey 2:
+Worry values held: 79, 60, 97.
+Items inspected: 0.
+Operator *, second operand old, divisible test 13, throw to 1 if true, throw to 3 if false.
+
+Monkey 3:
+Worry values held: 74.
+Items inspected: 0.
+Operator +, second operand 3, divisible test 17, throw to 0 if true, throw to 1 if false.
+
+Items: {79, 98, 54, 65, 75, 74, 79, 60, 97, 74}
+Rel 0: use % 23 on all of them.
+Rel 1: use % 19 on all of them.
+Rel 2: use % 13 on all of them.
+Rel 3: use % 17 on all of them.
+
+m0Items: {10, 6, 8, 19, 6, 5, 10, 14, 5, 5}
+m1Items: {3, 3, 16, 8, 18, 17, 3, 3, 2, 17}
+m2Items: {1, 7, 2, 0, 10, 9, 1, 8, 6, 9}
+m3Items: {11, 13, 3, 14, 7, 6, 11, 9, 12, 6}
+
+((79 % 23) * 19) % 23 = 6; ((98 % 23) * 19) % 23 = 22.
+m0Items: {6, 22, 8, 19, 6, 5, 10, 14, 5, 5}
+((79 % 19) * 19) % 19 = 0; ((98 % 19) * 19) % 19 = 0.
+m1Items: {0, 0, 16, 8, 18, 17, 3, 3, 2, 17}
+((79 % 13) * 19) % 13 = 6; ((98 % 13) * 19) % 13 = 3.
+m2Items: {6, 3, 2, 0, 10, 9, 1, 8, 6, 9}
+((79 % 17) * 19) % 17 = 5; ((98 % 17) * 19) % 17 = 9.
+m3Items: {5, 9, 3, 14, 7, 6, 11, 9, 12, 6}
+
+For each of the lists:
+ It multiplied the first two terms by 19
+ Then it modulo'd the terms by their respective modulos.

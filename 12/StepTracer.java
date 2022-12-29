@@ -60,6 +60,50 @@ public class StepTracer
 		}
 	}
 
+	public void printMinStepsMaps()
+	{
+		HashSet<MapPoint> allReachedPoints = new HashSet<>();
+		for (HashSet<MapPoint> stepPoints : this.minStepsToPoints)
+		{
+			try
+			{
+				Thread.sleep(34);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			allReachedPoints.addAll(stepPoints);
+			printMapPoints(allReachedPoints);
+		}
+	}
+
+	public void printMapPoints(HashSet<MapPoint> mapPoints)
+	{
+		for (int i = 0; i < 10; i++)
+			System.out.println();
+
+		for (int row = 0; row < elevationMap.getHeight(); row++)
+		{
+			for (int col = 0; col < elevationMap.getWidth(); col++)
+			{
+				boolean pointAtThisPos = false;
+				for (MapPoint mp : mapPoints)
+				{
+					if (mp.getX() == col && mp.getY() == row)
+					{
+						System.out.print(mp.getHeight());
+						pointAtThisPos = true;
+						break;
+					}
+				}
+				if (!pointAtThisPos)
+					System.out.print(' ');
+			}
+			System.out.println();
+		}
+	}
+
 	private void calculateMinStepsToPoints()
 	{
 		this.minStepsToPoints.add(new HashSet<>(Set.of(this.rootStartingPoint)));
@@ -136,6 +180,6 @@ public class StepTracer
 			}
 			stepCount++;
 		}
-		return stepCount;
+		return -1;
 	}
 }

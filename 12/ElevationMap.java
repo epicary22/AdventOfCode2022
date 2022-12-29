@@ -110,4 +110,14 @@ public class ElevationMap
 				System.out.print(mp.getHeight());
 		}
 	}
+
+	public int getHeight()
+	{
+		return this.height;
+	}
+
+	public int getWidth()
+	{
+		return this.width;
+	}
 }

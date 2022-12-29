@@ -1,0 +1,17 @@
+== Advent of Code Day 12 ==
+
+This one wants you to find the fastest route from point S to point E, with these restrictions:
+ - You can only go up one character at once ('a' to 'b', but not 'a' to 'c').
+ - You can go down as much as you want in one step ('b' to 'a', also 't' to 'a').
+ - You may only take one step in a single direction at once.
+
+How to solve for the shortest path is:
+ - Each point has a "shortest distance" from S.
+ abaa
+ Sbaa
+ abca
+ - 0 steps from S, you have point (0, 1) 'S'
+ - 1 step from S, you have points (0, 2) 'a', (1, 1) 'b', (0, 0) 'a'.
+ - 2 steps from S, you have points (1, 2) 'b', (2, 1) 'a', (1, 0) 'b', and (0, 1) 'S'.
+  - Here we can see that (0, 1) is both 0 and 2 steps away from 'S',
+    which means that we need to remove it from any lists above 0 steps.

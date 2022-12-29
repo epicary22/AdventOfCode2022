@@ -40,6 +40,7 @@ public class ElevationMap
 	public HashSet<MapPoint> getAdjacentPoints(MapPoint currentPt)
 	{
 		MapPoint upPt, rightPt, downPt, leftPt;
+		HashSet<MapPoint> adjacentPoints = new HashSet<>();
 		if (currentPt.getY() >= this.height - 1)
 			upPt = new MapPoint(-1, -1, '~');
 		else
@@ -56,7 +57,11 @@ public class ElevationMap
 			leftPt = new MapPoint(-1, -1, '~');
 		else
 			leftPt = this.elevationMap.get(currentPt.getY()).get(currentPt.getX() - 1);
-		return new HashSet<>(Set.of(upPt, rightPt, downPt, leftPt));
+		// Java 8 is whiny about Set.of();
+		// return new HashSet<>(Set.of(upPt, rightPt, downPt, leftPt));
+		for (MapPoint mp : new MapPoint[] {upPt, rightPt, downPt, leftPt})
+			adjacentPoints.add(mp);
+		return adjacentPoints;
 	}
 
 	public MapPoint getMapPoint(int x, int y)

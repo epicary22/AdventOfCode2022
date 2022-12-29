@@ -74,7 +74,9 @@ public class StepTracer
 
 	private void calculateMinStepsToPoints()
 	{
-		this.minStepsToPoints.add(new HashSet<>(Set.of(this.rootStartingPoint)));
+		HashSet<MapPoint> initialSet = new HashSet<>();
+		initialSet.add(this.rootStartingPoint);
+		this.minStepsToPoints.add(initialSet);
 		while (this.minStepsToPoints.get(this.minStepsToPoints.size() - 1).size() != 0)
 		{
 			addNextStepOfPoints();

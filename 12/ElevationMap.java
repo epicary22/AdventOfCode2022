@@ -6,7 +6,6 @@ public class ElevationMap
 	private final ArrayList<ArrayList<MapPoint>> elevationMap = new ArrayList<>();
 	private int width;
 	private int height;
-	public enum Direction {UP, RIGHT, DOWN, LEFT}
 
 	public ElevationMap(String filename)
 	{
@@ -37,33 +36,6 @@ public class ElevationMap
 			e.printStackTrace();
 		}
 	}
-
-//	public Map<Direction, MapPoint> getAdjacentPoints(MapPoint currentPt)
-//	{
-//		MapPoint upPt, rightPt, downPt, leftPt;
-//		if (currentPt.getY() == this.height - 1)
-//			upPt = new MapPoint(-1, -1, ' ');
-//		else
-//			upPt = this.elevationMap.get(currentPt.getY() + 1).get(currentPt.getX());
-//		if (currentPt.getX() == this.width - 1)
-//			rightPt = new MapPoint(-1, -1, ' ');
-//		else
-//			rightPt = this.elevationMap.get(currentPt.getY()).get(currentPt.getX() + 1);
-//		if (currentPt.getY() == 0)
-//			downPt = new MapPoint(-1, -1, ' ');
-//		else
-//			downPt = this.elevationMap.get(currentPt.getY() - 1).get(currentPt.getX());
-//		if (currentPt.getX() == 0)
-//			leftPt = new MapPoint(-1, -1, ' ');
-//		else
-//			leftPt = this.elevationMap.get(currentPt.getY()).get(currentPt.getX() - 1);
-//		return Map.of(
-//			Direction.UP, upPt,
-//			Direction.RIGHT, rightPt,
-//			Direction.DOWN, downPt,
-//			Direction.LEFT, leftPt
-//		);
-//	}
 
 	public HashSet<MapPoint> getAdjacentPoints(MapPoint currentPt)
 	{

@@ -1,4 +1,3 @@
-import java.io.PrintWriter;
 import java.util.*;
 
 public class StepTracer
@@ -14,49 +13,18 @@ public class StepTracer
 		this.calculateMinStepsToPoints();
 	}
 
-	public void minStepsToPointsToOutFile()
-	{
-		try
-		{
-			PrintWriter outFile = new PrintWriter("12/steps.txt");
-			String outString = "";
-			int stepCount = 0;
-			for (HashSet<MapPoint> stepSet : this.minStepsToPoints)
-			{
-				outString += "Step " + stepCount + ":\n";
-				for (MapPoint mp : stepSet)
-				{
-					outString += mp.getPropertiesString() + "\n";
-				}
-				outString += "\n";
-			}
-			outFile.print(outString);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
 	public void printMinStepsToPoints()
 	{
-		try
+		int stepCount = 0;
+		for (HashSet<MapPoint> stepSet : this.minStepsToPoints)
 		{
-			int stepCount = 0;
-			for (HashSet<MapPoint> stepSet : this.minStepsToPoints)
+			System.out.println("Step " + stepCount + ":");
+			for (MapPoint mp : stepSet)
 			{
-				System.out.println("Step " + stepCount + ":");
-				for (MapPoint mp : stepSet)
-				{
-					System.out.println(mp.getPropertiesString());
-				}
-				System.out.println();
-				stepCount++;
+				System.out.println(mp.getPropertiesString());
 			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
+			System.out.println();
+			stepCount++;
 		}
 	}
 
@@ -67,7 +35,7 @@ public class StepTracer
 		{
 			try
 			{
-				Thread.sleep(34);
+				Thread.sleep(334);
 			}
 			catch (Exception e)
 			{
@@ -126,34 +94,6 @@ public class StepTracer
 		}
 		this.minStepsToPoints.add(newPoints);
 	}
-
-//	private void calculateMinStepsToPoints()
-//	{
-//		this.minStepsToPoints.add(new HashSet<>(Set.of(this.rootStartingPoint)));
-//		nextStep(this.rootStartingPoint, 0);
-//	}
-//
-//	private void nextStep(MapPoint currentPoint, int currentStepCount)
-//	{
-//		currentStepCount++;
-//
-//		HashSet<MapPoint> newPoints = new HashSet<>();
-//		for (MapPoint adjacentPoint : elevationMap.getAdjacentPoints(currentPoint))
-//		{
-//			if (!this.hasBeenSteppedTo(adjacentPoint) && currentPoint.canStepTo(adjacentPoint))
-//				newPoints.add(adjacentPoint);
-//		}
-//		this.minStepsToPoints.add(newPoints);
-//
-//		for (MapPoint newPoint : this.minStepsToPoints.get(currentStepCount))
-//		{
-//			this.nextStep(newPoint, currentStepCount);
-//		}
-//
-//		// TODO something is happening here:
-//		// we need to take the current steps' adjacent points and add them to the minStepsToPoints.
-//		// then after that, we can take the top layer of minStepsToPoints and scan those.
-//	}
 
 	private boolean hasBeenSteppedTo(MapPoint mp)
 	{
